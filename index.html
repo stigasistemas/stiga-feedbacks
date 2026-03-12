@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stiga Finance — Tutoriais</title>
+    <link rel="icon" href="logo-stiga.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="particles-js"></div>
+
+<!-- LOGIN -->
+<div id="screen-login" class="screen active">
+    <div class="login-wrap">
+        <div class="login-card">
+            <div class="login-logo-wrap">
+                <img src="logo-stiga.png" alt="Stiga Finance" class="login-logo">
+            </div>
+            <h1 class="login-brand">STIGA FINANCE</h1>
+            <p class="login-tagline">Área Exclusiva de Tutoriais</p>
+            <div class="gold-line"></div>
+            <form id="loginForm">
+                <div class="field-group">
+                    <label class="field-label">Email</label>
+                    <div class="field-wrap">
+                        <svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+                    </div>
+                </div>
+                <div class="field-group">
+                    <label class="field-label">Senha</label>
+                    <div class="field-wrap">
+                        <svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <input type="password" id="loginPassword" placeholder="••••••••••" required>
+                        <button type="button" class="pw-toggle" onclick="togglePw()">
+                            <svg id="eyeIco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="btn-gold" id="btnLogin">
+                    <span>Acessar Tutoriais</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+            </form>
+            <p class="login-help">Problemas? <a href="mailto:stigasistemas@gmail.com">stigasistemas@gmail.com</a></p>
+        </div>
+    </div>
+</div>
+
+<!-- HOME -->
+<div id="screen-home" class="screen">
+    <header class="site-header">
+        <div class="hdr-left">
+            <img src="logo-stiga.png" alt="Stiga" class="hdr-logo">
+            <div>
+                <span class="hdr-brand">STIGA FINANCE</span>
+                <span class="hdr-sub">Central de Tutoriais</span>
+            </div>
+        </div>
+        <div class="hdr-right">
+            <span class="hdr-user" id="hdrUser"></span>
+            <button class="btn-outline-danger" onclick="logout()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                Sair
+            </button>
+        </div>
+    </header>
+
+    <main class="home-main">
+        <section class="home-hero">
+            <p class="hero-eyebrow">✦ Bem-vindo à sua área exclusiva ✦</p>
+            <h2 class="hero-title">Escolha seu Módulo</h2>
+            <p class="hero-sub">Selecione como você usa o Stiga Finance e assista ao tutorial completo</p>
+        </section>
+
+        <section class="modules-section">
+            <div class="modules-grid">
+
+                <!-- CARD PC -->
+                <div class="mod-card" onclick="openModule('pc')">
+                    <div class="mod-card-visual mod-card-visual--pc">
+                        <div class="mod-visual-overlay"></div>
+                        <svg class="mod-illustration" viewBox="0 0 320 200" fill="none">
+                            <rect x="30" y="20" width="260" height="140" rx="10" fill="rgba(212,175,55,0.06)" stroke="rgba(212,175,55,0.35)" stroke-width="1.5"/>
+                            <rect x="42" y="32" width="236" height="116" rx="5" fill="rgba(8,12,22,0.7)"/>
+                            <rect x="55" y="45" width="90" height="5" rx="2.5" fill="rgba(212,175,55,0.6)"/>
+                            <rect x="55" y="58" width="140" height="4" rx="2" fill="rgba(255,255,255,0.12)"/>
+                            <rect x="55" y="70" width="110" height="4" rx="2" fill="rgba(255,255,255,0.12)"/>
+                            <rect x="55" y="82" width="70" height="4" rx="2" fill="rgba(46,204,113,0.45)"/>
+                            <rect x="55" y="94" width="130" height="4" rx="2" fill="rgba(255,255,255,0.1)"/>
+                            <rect x="55" y="106" width="55" height="4" rx="2" fill="rgba(212,175,55,0.35)"/>
+                            <polyline points="170,128 188,105 205,115 222,88 240,98 258,78" stroke="rgba(212,175,55,0.75)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                            <circle cx="258" cy="78" r="3.5" fill="rgba(212,175,55,0.9)"/>
+                            <rect x="130" y="160" width="60" height="10" rx="3" fill="rgba(212,175,55,0.18)"/>
+                            <rect x="105" y="170" width="110" height="6" rx="3" fill="rgba(212,175,55,0.12)"/>
+                        </svg>
+                        <div class="mod-card-tag-top">💻 PC / Desktop</div>
+                    </div>
+                    <div class="mod-card-body">
+                        <div class="mod-body-left">
+                            <h3 class="mod-title">Módulo PC</h3>
+                            <p class="mod-desc">Tutorial completo para usar o Stiga Finance no computador — do cadastro aos relatórios avançados.</p>
+                            <div class="mod-meta">
+                                <span class="mod-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg> 1 aula</span>
+                                <span class="mod-tag mod-tag--gold">Completo</span>
+                            </div>
+                        </div>
+                        <button class="mod-btn mod-btn--pc">
+                            Ver aulas
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD MOBILE -->
+                <div class="mod-card" onclick="openModule('mobile')">
+                    <div class="mod-card-visual mod-card-visual--mobile">
+                        <div class="mod-visual-overlay"></div>
+                        <svg class="mod-illustration" viewBox="0 0 320 200" fill="none">
+                            <!-- iPhone -->
+                            <rect x="60" y="18" width="72" height="130" rx="12" fill="rgba(162,170,173,0.08)" stroke="rgba(162,170,173,0.4)" stroke-width="1.5"/>
+                            <rect x="68" y="30" width="56" height="100" rx="4" fill="rgba(8,12,22,0.65)"/>
+                            <rect x="75" y="40" width="40" height="4" rx="2" fill="rgba(212,175,55,0.55)"/>
+                            <rect x="75" y="52" width="32" height="3" rx="1.5" fill="rgba(255,255,255,0.15)"/>
+                            <rect x="75" y="62" width="38" height="3" rx="1.5" fill="rgba(255,255,255,0.12)"/>
+                            <rect x="75" y="72" width="24" height="3" rx="1.5" fill="rgba(46,204,113,0.4)"/>
+                            <polyline points="75,108 84,96 93,102 102,88 112,94 118,84" stroke="rgba(162,170,173,0.65)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                            <rect x="82" y="22" width="28" height="5" rx="2.5" fill="rgba(8,12,22,0.9)"/>
+                            <circle cx="96" cy="140" r="5" fill="rgba(162,170,173,0.2)" stroke="rgba(162,170,173,0.4)" stroke-width="1"/>
+                            <!-- label ios -->
+                            <text x="96" y="158" text-anchor="middle" font-size="9" fill="rgba(162,170,173,0.7)" font-family="sans-serif">iPhone</text>
+
+                            <!-- Android -->
+                            <rect x="188" y="18" width="72" height="130" rx="10" fill="rgba(61,220,132,0.08)" stroke="rgba(61,220,132,0.4)" stroke-width="1.5"/>
+                            <rect x="196" y="30" width="56" height="100" rx="4" fill="rgba(8,12,22,0.65)"/>
+                            <rect x="203" y="40" width="40" height="4" rx="2" fill="rgba(61,220,132,0.6)"/>
+                            <rect x="203" y="52" width="34" height="3" rx="1.5" fill="rgba(255,255,255,0.15)"/>
+                            <rect x="203" y="62" width="28" height="3" rx="1.5" fill="rgba(255,255,255,0.12)"/>
+                            <rect x="203" y="72" width="20" height="3" rx="1.5" fill="rgba(212,175,55,0.4)"/>
+                            <polyline points="203,108 212,94 221,100 230,86 240,92 244,82" stroke="rgba(61,220,132,0.65)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                            <circle cx="224" cy="22" r="3" fill="rgba(8,12,22,0.9)" stroke="rgba(61,220,132,0.4)" stroke-width="0.8"/>
+                            <text x="224" y="158" text-anchor="middle" font-size="9" fill="rgba(61,220,132,0.7)" font-family="sans-serif">Android</text>
+
+                            <!-- VS -->
+                            <text x="160" y="100" text-anchor="middle" font-size="13" fill="rgba(212,175,55,0.5)" font-family="serif" font-style="italic">vs</text>
+                        </svg>
+                        <div class="mod-card-tag-top">📱 Android &amp; iPhone</div>
+                    </div>
+                    <div class="mod-card-body">
+                        <div class="mod-body-left">
+                            <h3 class="mod-title">Módulo Mobile</h3>
+                            <p class="mod-desc">Tutoriais separados para Android e iPhone — escolha seu dispositivo e aprenda passo a passo.</p>
+                            <div class="mod-meta">
+                                <span class="mod-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg> 2 aulas</span>
+                                <span class="mod-tag mod-tag--android">Android</span>
+                                <span class="mod-tag mod-tag--ios">iPhone</span>
+                            </div>
+                        </div>
+                        <button class="mod-btn mod-btn--mobile">
+                            Ver aulas
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- AGRADECIMENTO -->
+        <section class="thanks-section">
+            <div class="thanks-card">
+                <div class="thanks-emoji">🏆</div>
+                <h3 class="thanks-title">Obrigado pela sua confiança!</h3>
+                <p class="thanks-text">Você tomou uma decisão incrível ao investir no Stiga Finance. Agora você tem tudo que precisa para organizar suas finanças com inteligência e clareza. Estamos aqui para te apoiar em cada passo dessa jornada. 💛</p>
+                <div class="thanks-divider"></div>
+                <p class="thanks-quote">"O primeiro passo para a liberdade financeira é saber para onde vai cada centavo."</p>
+            </div>
+        </section>
+
+        <!-- FEEDBACK -->
+        <section class="feedback-section">
+            <div class="feedback-inner">
+                <div class="feedback-hdr">
+                    <h3 class="feedback-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        Deixe seu Feedback
+                    </h3>
+                    <p class="feedback-sub">Sua opinião nos ajuda a melhorar. Leva menos de 1 minuto!</p>
+                </div>
+
+                <div class="feedback-card" id="feedbackCard">
+                    <div id="fbStep1">
+                        <p class="fb-question">Como você avalia sua experiência com o Stiga Finance?</p>
+                        <div class="stars-wrap" id="starsWrap">
+                            <span class="star" data-val="1" onmouseenter="hoverStar(1)" onmouseleave="unhoverStar()" onclick="setStar(1)">★</span>
+                            <span class="star" data-val="2" onmouseenter="hoverStar(2)" onmouseleave="unhoverStar()" onclick="setStar(2)">★</span>
+                            <span class="star" data-val="3" onmouseenter="hoverStar(3)" onmouseleave="unhoverStar()" onclick="setStar(3)">★</span>
+                            <span class="star" data-val="4" onmouseenter="hoverStar(4)" onmouseleave="unhoverStar()" onclick="setStar(4)">★</span>
+                            <span class="star" data-val="5" onmouseenter="hoverStar(5)" onmouseleave="unhoverStar()" onclick="setStar(5)">★</span>
+                        </div>
+                        <p class="star-label" id="starLabel">Clique nas estrelas para avaliar</p>
+                        <div class="fb-field-group">
+                            <label class="field-label">Sugestão ou comentário <span style="opacity:0.5;font-size:0.85em">(opcional)</span></label>
+                            <textarea id="fbText" placeholder="O que você achou? O que poderia melhorar? Conta pra gente! 😊" rows="4"></textarea>
+                        </div>
+                        <button class="btn-gold" id="btnFeedback" onclick="submitFeedback()" disabled>
+                            <span>Enviar Avaliação</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                        </button>
+                    </div>
+                    <div id="fbStep2" style="display:none;" class="fb-success">
+                        <div class="fb-success-icon">🎉</div>
+                        <h4 class="fb-success-title">Avaliação enviada!</h4>
+                        <p class="fb-success-text">Muito obrigado! Seu feedback é muito importante para continuarmos melhorando o Stiga Finance para você.</p>
+                        <div class="fb-stars-show" id="fbStarsShow"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<!-- MÓDULO PC -->
+<div id="screen-pc" class="screen">
+    <header class="site-header">
+        <div class="hdr-left">
+            <button class="btn-back" onclick="goHome()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                Voltar
+            </button>
+            <div class="hdr-breadcrumb">
+                <span>Tutoriais</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="9 18 15 12 9 6"/></svg>
+                <span class="bc-active">Módulo PC</span>
+            </div>
+        </div>
+        <div class="hdr-right">
+            <button class="btn-outline-danger" onclick="logout()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                Sair
+            </button>
+        </div>
+    </header>
+    <main class="module-main">
+        <div class="module-banner module-banner--pc">
+            <div class="module-banner-content">
+                <div class="module-banner-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                </div>
+                <div>
+                    <h2 class="module-banner-title">Módulo PC</h2>
+                    <p class="module-banner-sub">Tutorial completo para computador</p>
+                </div>
+            </div>
+            <span class="module-banner-badge">1 aula disponível</span>
+        </div>
+        <div class="lessons-wrap">
+            <h3 class="lessons-section-title">Aulas do Módulo</h3>
+            <div class="lesson-card" onclick="openVideo('COLE_ID_YOUTUBE_PC', 'Tutorial Completo — Stiga Finance no PC')">
+                <div class="lc-num">01</div>
+                <div class="lc-play lc-play--pc">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <div class="lc-info">
+                    <h4 class="lc-title">Tutorial Completo — Stiga Finance no PC</h4>
+                    <p class="lc-desc">Aprenda tudo: adicionar transações, visualizar relatórios, configurar metas e muito mais.</p>
+                    <div class="lc-tags">
+                        <span class="ltag ltag--pc">💻 PC / Desktop</span>
+                        <span class="ltag">Tutorial Completo</span>
+                    </div>
+                </div>
+                <div class="lc-cta lc-cta--pc">
+                    Assistir agora
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- MÓDULO MOBILE -->
+<div id="screen-mobile" class="screen">
+    <header class="site-header">
+        <div class="hdr-left">
+            <button class="btn-back" onclick="goHome()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                Voltar
+            </button>
+            <div class="hdr-breadcrumb">
+                <span>Tutoriais</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="9 18 15 12 9 6"/></svg>
+                <span class="bc-active">Módulo Mobile</span>
+            </div>
+        </div>
+        <div class="hdr-right">
+            <button class="btn-outline-danger" onclick="logout()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                Sair
+            </button>
+        </div>
+    </header>
+    <main class="module-main">
+        <div class="module-banner module-banner--mobile">
+            <div class="module-banner-content">
+                <div class="module-banner-icon module-banner-icon--mobile">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                </div>
+                <div>
+                    <h2 class="module-banner-title">Módulo Mobile</h2>
+                    <p class="module-banner-sub">Tutoriais para Android e iPhone</p>
+                </div>
+            </div>
+            <span class="module-banner-badge">2 aulas disponíveis</span>
+        </div>
+        <div class="lessons-wrap">
+            <h3 class="lessons-section-title">Escolha seu dispositivo</h3>
+
+            <!-- Android -->
+            <div class="lesson-card" onclick="openVideo('COLE_ID_YOUTUBE_ANDROID', 'Tutorial Android — Stiga Finance')">
+                <div class="lc-num lc-num--android">01</div>
+                <div class="lc-play lc-play--android">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <div class="lc-info">
+                    <span class="lc-device-badge lc-device-badge--android">🤖 Android</span>
+                    <h4 class="lc-title">Tutorial Android</h4>
+                    <p class="lc-desc">Como instalar, configurar e usar o Stiga Finance no seu smartphone Android.</p>
+                    <div class="lc-tags"><span class="ltag ltag--android">Android</span></div>
+                </div>
+                <div class="lc-cta lc-cta--android">
+                    Assistir agora
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+            </div>
+
+            <!-- iPhone -->
+            <div class="lesson-card" onclick="openVideo('COLE_ID_YOUTUBE_IPHONE', 'Tutorial iPhone — Stiga Finance')">
+                <div class="lc-num lc-num--ios">02</div>
+                <div class="lc-play lc-play--ios">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <div class="lc-info">
+                    <span class="lc-device-badge lc-device-badge--ios"> iPhone</span>
+                    <h4 class="lc-title">Tutorial iPhone</h4>
+                    <p class="lc-desc">Como instalar, configurar e usar o Stiga Finance no seu iPhone com iOS.</p>
+                    <div class="lc-tags"><span class="ltag ltag--ios">iPhone / iOS</span></div>
+                </div>
+                <div class="lc-cta lc-cta--ios">
+                    Assistir agora
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- MODAL VÍDEO -->
+<div id="videoModal" class="vmodal" onclick="handleModalClick(event)">
+    <div class="vmodal-box">
+        <div class="vmodal-hdr">
+            <span class="vmodal-title" id="vmodalTitle"></span>
+            <button class="vmodal-close" onclick="closeVideo()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="vmodal-player">
+            <iframe id="videoFrame" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
