@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com; img-src 'self' data:; frame-src 'none';">
     <title>Stiga Finance — Admin Feedbacks</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -190,6 +193,11 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db   = firebase.firestore();
 
+// Garante persistência de sessão local
+auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(e => {
+    console.warn('Persistence warning:', e);
+});
+
 const ADMIN_EMAIL = 'stigasistemas@gmail.com';
 
 function showDash() {
@@ -280,21 +288,44 @@ async function loadFeedbacks() {
         }
 
         // Render
-        document.getElementById('fbList').innerHTML = docs.map(d => {
-            const stars   = '★'.repeat(d.stars || 0) + '☆'.repeat(5 - (d.stars || 0));
-            const comment = d.comment && d.comment.trim() ? d.comment : 'Sem comentário';
+        const listEl = document.getElementById('fbList');
+        listEl.innerHTML = '';
+
+        docs.forEach(d => {
+            const stars   = '★'.repeat(Math.min(d.stars || 0, 5)) + '☆'.repeat(5 - Math.min(d.stars || 0, 5));
             const isEmpty = !d.comment || !d.comment.trim();
             const date    = d.createdAt ? formatDate(d.createdAt.toDate()) : 'Data desconhecida';
-            return `
-                <div class="fb-item">
-                    <div class="fb-stars">${stars}</div>
-                    <div>
-                        <div class="fb-email">${d.email || 'Anônimo'}</div>
-                        <div class="fb-comment ${isEmpty ? 'empty' : ''}">${comment}</div>
-                    </div>
-                    <div class="fb-date">${date}</div>
-                </div>`;
-        }).join('');
+
+            // 🔒 Cria elementos via DOM — nunca innerHTML com dados do usuário
+            const item = document.createElement('div');
+            item.className = 'fb-item';
+
+            const starsEl = document.createElement('div');
+            starsEl.className = 'fb-stars';
+            starsEl.textContent = stars;
+
+            const mid = document.createElement('div');
+
+            const emailEl = document.createElement('div');
+            emailEl.className = 'fb-email';
+            emailEl.textContent = d.email || 'Anônimo'; // textContent — seguro contra XSS
+
+            const commentEl = document.createElement('div');
+            commentEl.className = 'fb-comment' + (isEmpty ? ' empty' : '');
+            commentEl.textContent = isEmpty ? 'Sem comentário' : d.comment; // textContent — seguro
+
+            mid.appendChild(emailEl);
+            mid.appendChild(commentEl);
+
+            const dateEl = document.createElement('div');
+            dateEl.className = 'fb-date';
+            dateEl.textContent = date;
+
+            item.appendChild(starsEl);
+            item.appendChild(mid);
+            item.appendChild(dateEl);
+            listEl.appendChild(item);
+        });
 
     } catch(e) {
         console.error(e);

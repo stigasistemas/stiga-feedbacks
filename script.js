@@ -236,26 +236,41 @@ function setStar(val) {
 async function submitFeedback() {
     if (!selectedStar) return;
 
-    const text = document.getElementById('fbText').value.trim();
-    const btn  = document.getElementById('btnFeedback');
+    // Usuário precisa estar autenticado
+    if (!currentUser) {
+        showToast('❌ Você precisa estar logado para avaliar.', 'error');
+        return;
+    }
 
+    // Validações no cliente
+    const stars = parseInt(selectedStar, 10);
+    if (stars < 1 || stars > 5) {
+        showToast('❌ Avaliação inválida.', 'error');
+        return;
+    }
+
+    const rawText = document.getElementById('fbText').value;
+    const text    = rawText.trim().substring(0, 500); // limita a 500 chars
+
+    const btn = document.getElementById('btnFeedback');
     btn.disabled = true;
     btn.innerHTML = '<span>Enviando...</span>';
 
     try {
-        await db.collection('feedbacks').add({
-            uid:       currentUser ? currentUser.uid   : 'anonimo',
-            email:     currentUser ? currentUser.email : 'anonimo',
-            stars:     selectedStar,
+        // 🔒 doc(uid) garante 1 feedback por usuário (validado também nas regras do Firestore)
+        await db.collection('feedbacks').doc(currentUser.uid).set({
+            uid:       currentUser.uid,
+            email:     currentUser.email,
+            stars:     stars,
             comment:   text,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
 
         document.getElementById('fbStep1').style.display = 'none';
         document.getElementById('fbStep2').style.display = 'block';
-        document.getElementById('fbStarsShow').textContent = '★'.repeat(selectedStar) + '☆'.repeat(5 - selectedStar);
+        document.getElementById('fbStarsShow').textContent = '★'.repeat(stars) + '☆'.repeat(5 - stars);
 
-        if (currentUser) localStorage.setItem('fb_done_' + currentUser.uid, '1');
+        localStorage.setItem('fb_done_' + currentUser.uid, '1');
         showToast('✅ Avaliação enviada! Obrigado!', 'success');
 
     } catch (err) {
@@ -267,7 +282,21 @@ async function submitFeedback() {
 }
 
 function checkAlreadyFeedback(uid) {
-    if (!localStorage.getItem('fb_done_' + uid)) return;
+    // Verifica localStorage primeiro (rápido)
+    if (localStorage.getItem('fb_done_' + uid)) {
+        _showFeedbackDone();
+        return;
+    }
+    // Verifica no Firestore (fonte verdadeira — doc com ID = uid)
+    db.collection('feedbacks').doc(uid).get().then(doc => {
+        if (doc.exists) {
+            localStorage.setItem('fb_done_' + uid, '1');
+            _showFeedbackDone();
+        }
+    }).catch(() => {}); // silencia erro — não bloqueia o usuário
+}
+
+function _showFeedbackDone() {
     const step1 = document.getElementById('fbStep1');
     const step2 = document.getElementById('fbStep2');
     if (!step1 || !step2) return;
