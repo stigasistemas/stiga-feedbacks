@@ -38,6 +38,11 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
+    // Garante que a sessão persista localmente (não expira ao fechar/reabrir aba)
+    auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(e => {
+        console.warn('Persistence warning:', e);
+    });
+
     auth.onAuthStateChanged(user => {
         authReady = true;
         if (user) {
@@ -45,8 +50,26 @@ document.addEventListener('DOMContentLoaded', function () {
             showScreen('home');
             setUserName(user);
             checkAlreadyFeedback(user.uid);
+
+            // Renova o token a cada 50 minutos para evitar expiração silenciosa
+            if (window._tokenRefreshInterval) clearInterval(window._tokenRefreshInterval);
+            window._tokenRefreshInterval = setInterval(async () => {
+                try {
+                    if (auth.currentUser) {
+                        await auth.currentUser.getIdToken(true);
+                        console.log('Token renovado com sucesso');
+                    }
+                } catch (err) {
+                    console.error('Erro ao renovar token:', err);
+                }
+            }, 50 * 60 * 1000); // 50 minutos
+
         } else {
             currentUser = null;
+            if (window._tokenRefreshInterval) {
+                clearInterval(window._tokenRefreshInterval);
+                window._tokenRefreshInterval = null;
+            }
             showScreen('login');
         }
     }, err => {
